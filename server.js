@@ -3,16 +3,17 @@ const app = express();
 const http =require('http');
 const path = require('path');
 const {Server} = require('socket.io');
-
+const ACTIONS = require('./src/actions');
 const server = http.createServer(app);
 const io = new Server(server);
 
-const ACTIONS = require('./src/actions');
+
 
 app.use(express.static('build'));
 app.use((req,res,next)=>{
+    console.log("resd")
     res.sendFile(path.join(__dirname,'build','index.html'))
-})
+});
 
 const userSocketMap = {};
 function getAllConnectedClients(roomId){
